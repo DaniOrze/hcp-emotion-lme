@@ -1,0 +1,67 @@
+
+SCANNER = "Siemens Connectome Skyra"
+FIELD_STRENGTH = 3.0
+SEQUENCE = "Gradient-echo EPI (multiband)"
+MULTIBAND_FACTOR = 8
+TR = 0.72 
+TE = 33.1  
+FLIP_ANGLE = 52 
+VOXEL_SIZE = (2.0, 2.0, 2.0)
+MATRIX_SIZE = (104, 90, 72)
+FOV = (208, 180)
+N_SLICES = 72
+PHASE_ENCODING = ["LR", "RL"]  
+N_VOLUMES_PER_RUN = 176 
+TASK_DURATION_SEC = 176 * TR 
+TOTAL_SCAN_TIME_SEC = 2 * TASK_DURATION_SEC  
+
+
+HRF_MODEL = "spm"  
+HIGH_PASS = 1 / 128  
+NOISE_MODEL = "ar1"  
+DRIFT_MODEL = "cosine" 
+
+MOTION_CONFOUNDS_COLUMNS = 12 
+FD_THRESHOLD = 0.5  
+FD_PERCENT_THRESHOLD = 0.20
+DVARS_THRESHOLD = None  
+
+FDR_ALPHA = 0.05  
+Z_THRESHOLD = 3.1 
+CLUSTER_THRESHOLD = 50  
+
+SMOOTH_FWHM = 5.0 
+
+CLUSTER_FORMING_Z = 3.1  
+CLUSTER_FWE_ALPHA = 0.05  
+
+
+N_JOBS = 10  # parallel first-level GLM (~2 GB/process → ~20 GB)
+LME_N_JOBS = 8  # parallel LME workers (~6 GB/process → ~48 GB)
+LME_MEMORY_PER_PROCESS_GB = 6.0  # approximate memory per LME worker
+CHUNK_SIZE = 10000  # voxels per LME chunk (larger = less I/O overhead)
+
+
+LME_BACKEND = "pymer4"  
+LME_METHOD = "powell"  
+LME_REML = True  
+LME_MAX_ITER = 100 
+LME_FORMULA_FULL = "beta ~ 1 + run" 
+LME_FORMULA_NORUN = "beta ~ 1"  
+LME_FORMULA_FD = "beta ~ 1 + run + mean_fd" 
+LME_RANDOM_EFFECTS = "subject"  
+
+CONTRAST_NAME = "fear_minus_neut" 
+
+HCP_RELEASE = "S1200"
+N_SUBJECTS_TARGET = 143 
+RUNS_PER_SUBJECT = 2  
+TOTAL_RUNS = N_SUBJECTS_TARGET * RUNS_PER_SUBJECT  
+
+ROI_ATLAS = "Harvard-Oxford"
+ROI_ATLAS_THRESHOLD = "25%"  
+ROI_ATLAS_RESOLUTION = "2mm"  
+
+ANALYSIS_SPACE = "MNI152NLin6Asym"
+ANALYSIS_RESOLUTION = "2mm"
+ANALYSIS_FORMAT = "NIfTI"  
